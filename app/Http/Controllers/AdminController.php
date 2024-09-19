@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -454,7 +457,7 @@ class AdminController extends Controller
             'cart_value' => 'required|numeric',
             'expiry_date' => 'required|date',
         ]);
-        
+
         $coupon = Coupon::find($request->id);
         $coupon->code = $request->code;
         $coupon->value = $request->value;
@@ -469,5 +472,19 @@ class AdminController extends Controller
        $coupon = Coupon::find($id);
        $coupon->delete();
        return redirect()->route('admin.coupons')->with('status','Cupom deletado com sucesso!');
+    }
+
+    public function orders()
+    {
+       $orders = Order::orderBy('created_at','DESC')->paginate(12);
+       return view('admin.orders',compact('orders'));
+    }
+
+    public function order_details($order_id)
+    {
+        $order = Order::find($order_id);
+        $orderItems = OrderItem::where('order_id',$order_id)->orderBy('id')->paginate(12);
+        $transaction = Transaction::where('order_id',$order_id)->first();
+        return view('admin.order-details',compact('order','orderItems','transaction'));
     }
 }

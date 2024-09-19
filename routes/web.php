@@ -10,16 +10,6 @@ use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 
 Auth::routes();
@@ -50,7 +40,8 @@ Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
@@ -82,5 +73,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/coupon/{id}/edit', [AdminController::class, 'coupon_edit'])->name('admin.coupon.edit');
     Route::put('/admin/coupon/update', [AdminController::class, 'coupon_update'])->name('admin.coupon.update');
     Route::delete('/admin/coupon/{id}/delete', [AdminController::class, 'coupon_delete'])->name('admin.coupon.delete');
+
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
 
 });

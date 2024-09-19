@@ -135,11 +135,11 @@ class CartController extends Controller
         if(!$address)
         {
         $request->validate([
-            'name' => 'required|max:100',
+            'name' => 'required|max:1000',
             'phone' => 'required|numeric|digits:11',
             'zip' => 'required|numeric|digits:9',
             'state' => 'required',
-            'city' => 'required',            
+            'city' => 'required',
             'address' => 'required',
             'locality' => 'required',
             'landmark' => 'required',
@@ -152,9 +152,9 @@ class CartController extends Controller
         $address->state = $request->state;
         $address->city = $request->city;
         $address->address = $request->address;
-        $address->locality = $request->locality; 
+        $address->locality = $request->locality;
         $address->landmark = $request->landmark;
-        $address->coutry = 'Brasil';
+        $address->country = 'Brasil';
         $address->user_id = $user_id;
         $address->isdefault = true;
         $address->save();
@@ -200,17 +200,18 @@ class CartController extends Controller
     {
         $transaction = new Transaction();
         $transaction->user_id = $user_id;
-        $transaction->order_id = $request->mode;
-        $transaction->mode = $order->id;
+        $transaction->order_id = $order->id;
+        $transaction->mode = $request->mode;
         $transaction->status = "pending";
         $transaction->save();
-    }    
+    }
 
     Cart::instance('cart')->destroy();
     Session::forget('checkout');
     Session::forget('coupon');
     Session::forget('discounts');
-    return redirect()->route('cart.order.confirmation',compact('order'));
+    Session::put('order_id',$order->id);
+    return redirect()->route('cart.order.confirmation');
 }
 
     public function setAmountForCheckout()
@@ -236,12 +237,17 @@ class CartController extends Controller
                 'subtotal' => Cart::instance('cart')->subtotal(),
                 'tax' => Cart::instance('cart')->tax(),
                 'total' => Cart::instance('cart')->total(),
-            ]); 
+            ]);
         }
     }
 
     public function order_confirmation()
     {
-        return view('order-confirmation');
+        if(Session::has('order_id'))
+        {
+            $order = Order::find(Session::get('order_id'));
+            return view('order-confirmation',compact('order'));
+        }
+        return redirect()->route('cart.index');
     }
 }

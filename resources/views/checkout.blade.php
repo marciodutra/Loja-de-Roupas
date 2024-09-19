@@ -130,7 +130,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach (Cart::instance('cart') as $item)                    
+                    @foreach (Cart::instance('cart') as $item)
                     <tr>
                       <td>
                         {{$item->name}} x {{$item->qty}}
@@ -138,7 +138,7 @@
                       <td align="right">
                         R$ {{$item->subtotal}}
                       </td>
-                    </tr>                    
+                    </tr>
                     @endforeach
                   </tbody>
                 </table>
@@ -170,7 +170,7 @@
                               <td class="text-right">R$ {{Session::get('discounts')['total']}}</td>
                             </tr>
                           </tbody>
-                    </table> 
+                    </table>
                 @else
                 <table class="checkout-totals">
                   <tbody>
@@ -194,26 +194,26 @@
                 </table>
                 @endif
               </div>
-              <div class="checkout__payment-methods">                
+              <div class="checkout__payment-methods">
                 <div class="form-check">
                   <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode1" value="card">
                   <label class="form-check-label" for="mode1">
-                    Cartão de débito ou crédito                    
+                    Cartão de débito ou crédito
                   </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode2" value="paypal">
                     <label class="form-check-label" for="mode2">
-                      Paypal                      
+                      Paypal
                     </label>
                   </div>
                 <div class="form-check">
                   <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode3" value="cod">
                   <label class="form-check-label" for="mode3">
-                    Pagamento na entrega                    
+                    Pagamento na entrega
                   </label>
                 </div>
-                
+
                 <div class="policy-text">
                     Os seus dados pessoais serão utilizados para processar a sua encomenda, apoiar a sua experiência ao longo deste
                     site e para outros fins descritos em nossa <a href="terms.html" target="_blank">privacidade

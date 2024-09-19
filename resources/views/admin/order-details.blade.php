@@ -33,6 +33,9 @@
                 <a class="tf-button style-1 w208" href="{{route('admin.orders')}}">Voltar</a>
             </div>
             <div class="table-responsive">
+                @if (Session::has('status'))
+                    <p class="alert alert-success">{{Session::get('status')}}</p>
+                @endif
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th>Nº do pedido</th>
@@ -160,9 +163,9 @@
                         <td>{{$transaction->mode}}</td>
                         <th>Status</th>
                         <td>
-                            @if ($transaction->status == 'aproved')
+                            @if ($transaction->status == 'approved')
                                 <span class="badge bg-success">Aprovado</span>
-                            @elseif($transaction->status == 'declined')
+                            @elseif($transaction->status == 'declinded')
                                 <span class="badge bg-danger">Recusado</span>
                             @elseif($transaction->status == 'refunded')
                             <span class="badge bg-secondary">Reenbolsado</span>
@@ -173,6 +176,30 @@
                     </tr>                    
                 </tbody>
             </table>
+        </div>
+
+        <div class="wg-box mt-5">
+            <h5>Atualização status do pedido</h5>
+            <form action="{{route('admin.order.status.update')}}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="order_id" value="{{$order->id}}" />
+                <div class="row">
+                    <div class="col-md-3">
+                       <div class="select">
+                        <select id="order_status" name="order_status">
+                            <option value="ordered" {{$order->status == 'ordered' ? "selected" : ""}}>Encomendado</option>
+                            <option value="delivered" {{$order->status == 'delivered' ? "selected" : ""}}>Entregue</option>
+                            <option value="canceled" {{$order->status == 'canceled' ? "selected" : ""}}>Cancelado</option>
+                        </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary tf-button w208">Atualizar status</button>
+                    </div>
+                </div>
+            </form>
+                
         </div>
     </div>
 </div>

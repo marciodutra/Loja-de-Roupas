@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($orders as $order)                            
+                            @foreach ($orders as $order)
                             <tr>
                                 <td class="text-center">{{$order->id}}</td>
                                 <td class="text-center">{{{$order->name}}}</td>
@@ -60,7 +60,15 @@
                                 <td class="text-center">R$ {{$order->subtotal}}</td>
                                 <td class="text-center">R$ {{$order->tax}}</td>
                                 <td class="text-center">R$ {{$order->total}}</td>
-                                <td class="text-center">{{$order->status}}</td>
+                                <td class="text-center">
+                                    @if($order->status == 'delivered')
+                                        <span class="badge bg-success">Entregue</span>
+                                    @elseif($order->status == 'canceled')
+                                        <span class="badge bg-danger">Cancelado</span>
+                                    @else
+                                        <span class="badge bg-warning">Encomendado</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">{{$order->created_at}}</td>
                                 <td class="text-center">{{$order->orderItems->count()}}</td>
                                 <td class="text-center">{{$order->delivered_date}}</td>

@@ -107,17 +107,20 @@
             </div>
             <div class="col-lg-10">
                 <div class="wg-box">
-                    <div class="flex items-center justify-between gap10 flex-wrap">                        
+                    <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="row">
                             <div class="col-6">
                                 <h5>Detalhes do pedido</h5>
                             </div>
                                 <div class="col-6 text-right">
                                     <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Voltar</a>
-                                </div>                           
+                                </div>
                         </div>
                     </div>
                     <div class="table-responsive">
+                        @if (Session::has('status'))
+                            <p class="alert alert-success">{{Session::get('status')}}</p>
+                        @endif
                         <table class="table  table-bordered table-striped table-transaction">
                             <tr>
                                 <th>Nº pedido</th>
@@ -144,18 +147,18 @@
                                         <span class="badge bg-danger">Cancelado</span>
                                     @else
                                         <span class="badge bg-warning">Encomendado</span>
-                                    @endif            
+                                    @endif
                                 </td>
-                            </tr>                    
+                            </tr>
                         </table>
-                    </div>            
+                    </div>
                 </div>
-        
+
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
                             <h5>Itens do pedido</h5>
-                        </div>                
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
@@ -173,7 +176,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orderItems as $item)                        
+                                @foreach ($orderItems as $item)
                                 <tr>
                                     <td class="pname">
                                         <div class="image">
@@ -202,13 +205,13 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>        
+                    </div>
                     <div class="divider"></div>
                     <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
                         {{$orderItems->links('pagination::bootstrap-5')}}
                     </div>
                 </div>
-        
+
                 <div class="wg-box mt-5">
                     <h5>Endereço de entrega</h5>
                     <div class="my-account__address-item col-md-6">
@@ -224,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="wg-box mt-5">
                     <h5>Transações</h5>
                     <table class="table table-striped table-bordered table-transaction">
@@ -244,21 +247,54 @@
                                 <td>{{$transaction->mode}}</td>
                                 <th>Status</th>
                                 <td>
-                                    @if ($transaction->status == 'aproved')
+                                    @if ($transaction->status == 'approved')
                                         <span class="badge bg-success">Aprovado</span>
-                                    @elseif($transaction->status == 'declined')
+                                    @elseif($transaction->status == 'declinded')
                                         <span class="badge bg-danger">Recusado</span>
                                     @elseif($transaction->status == 'refunded')
                                     <span class="badge bg-secondary">Reenbolsado</span>
                                     @else
-                                        <span class="badge bg-warning">Pendente</span>                                
+                                        <span class="badge bg-warning">Pendente</span>
                                     @endif
                                 </td>
-                            </tr>                    
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                @if ($order->status=='ordered')                
+                <div class="wg-box mt-5 text-right">
+                    <form action="{{route('user.order.cancel')}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="order_id" value="{{$order->id}}" />
+                        <button type="button" class="btn btn-danger cancel-order">Cancelar pedido</button>
+                    </form>
+                </div>
+                @endif
             </div>
     </section>
-</main> 
+</main>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        $('.cancel-order').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).closest('form');
+            swal({
+                title: "Tem certeza?",
+                text: "Você deseja cancelar este pedido?",
+                type:"Aviso",
+                buttons:["Não","Sim"],
+                confirmButtonColor:'#dc3545'
+            }).then(function(result){
+                if(result){
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+@endpush

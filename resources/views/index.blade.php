@@ -165,7 +165,7 @@
               </div>
             </div>
 
-            <a href="#" class="btn-link default-underline text-uppercase fw-medium mt-3">Ver todos</a>
+            <a href="{{route('shop.index')}}" class="btn-link default-underline text-uppercase fw-medium mt-3">Ver todos</a>
           </div>
           <div class="col-md-6 col-lg-8 col-xl-80per">
             <div class="position-relative">
@@ -203,307 +203,32 @@
                   }
                 }'>
                 <div class="swiper-wrapper">
+
+                   @foreach ($sproducts as $sproduct)                    
                   <div class="swiper-slide product-card product-card_style3">
                     <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
+                      <a href="{{route('shop.product.details',['product_slug'=>$sproduct->slug])}}">
+                        <img loading="lazy" src="{{ asset('uploads/products') }}/{{$sproduct->image}}" width="258" height="313"
+                          alt="{{$sproduct->name}}" class="pc__img">                        
                       </a>
                     </div>
-
                     <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Jaqueta recortada de couro sintético</a></h6>
+                      <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$sproduct->slug])}}">{{$sproduct->name}}</a></h6>
                       <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$29,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Add To Cart">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
+                        <span class="money price text-secondary">
+                            @if ($sproduct->sale_price)
+                                <s>R$ {{$sproduct->regular_price}} </s> R${{$sproduct->sale_price}}
+                            @else
+                                R$ {{$sproduct->regular_price}}
+                            @endif
+                        </span>
+                      </div>                      
                     </div>
                   </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Shorts Calvin</a></h6>
-                      <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$62,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Add To Cart">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Camiseta Kirby</a></h6>
-                      <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$62,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Add To Cart">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Xale de malha trançada</a></h6>
-                      <div class="product-card__price d-flex align-items-center">
-                        <span class="money price-old">R$129,00</span>
-                        <span class="money price text-secondary">R$99,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Add To Cart">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-0-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Jaqueta recortada de couro sintético</a></h6>
-                      <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$29,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Add To Cart">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                          <span class="d-none d-xxl-block">Quick View</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-1-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Shorts Calvin</a></h6>
-                      <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$62,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-2-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Camiseta Kirby</a></h6>
-                      <div class="product-card__price d-flex">
-                        <span class="money price text-secondary">R$62,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide product-card product-card_style3">
-                    <div class="pc__img-wrapper">
-                      <a href="details.html">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-1.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-3-2.jpg')}}" width="258" height="313"
-                          alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
-                      </a>
-                    </div>
-
-                    <div class="pc__info position-relative">
-                      <h6 class="pc__title"><a href="details.html">Xale de malha trançada</a></h6>
-                      <div class="product-card__price d-flex align-items-center">
-                        <span class="money price-old">R$129,00</span>
-                        <span class="money price text-secondary">R$99,00</span>
-                      </div>
-
-                      <div
-                        class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                          data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                        <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                          data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                          <span class="d-none d-xxl-block">Visualização rápida</span>
-                          <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <use href="#icon_view" />
-                            </svg></span>
-                        </button>
-                        <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_heart" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div><!-- /.swiper-wrapper -->
-              </div><!-- /.swiper-container js-swiper-slider -->
-            </div><!-- /.position-relative -->
+                  @endforeach                  
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -547,299 +272,32 @@
         <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Produtos em destaque</h2>
 
         <div class="row">
+            @foreach ($fproducts as $fproduct)            
           <div class="col-6 col-md-4 col-lg-3">
             <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
               <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-4.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
+                <a href="{{route('shop.product.details',['product_slug'=>$fproduct->slug])}}">
+                  <img loading="lazy" src="{{ asset('uploads/products')}}/{{$fproduct->image}}" width="330" height="400"
+                    alt="{{$fproduct->name}}" class="pc__img">
                 </a>
               </div>
 
               <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Jaqueta recortada de couro sintético</a></h6>
+                <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$fproduct->slug])}}">{{$fproduct->name}}</a></h6>
                 <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$29,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
+                  <span class="money price text-secondary">
+                    @if ($fproduct->sale_price)
+                        <s>R$ {{$fproduct->regular_price}} </s> R${{$fproduct->sale_price}}
+                    @else
+                        R$ {{$fproduct->regular_price}}
+                    @endif
+                  </span>
+                </div>                
               </div>
             </div>
           </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-5.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Shorts Calvin</a></h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$62,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-6.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-                <div class="product-label text-uppercase bg-white top-0 left-0 mt-2 mx-2">Novo</div>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Camiseta Kirby</a></h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$17,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-7.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-                <div class="product-label bg-red text-white right-0 top-0 left-auto mt-2 mx-2">-67%</div>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title">Xale de malha trançada</h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price-old">$129</span>
-                  <span class="money price text-secondary">R$99,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-8.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Jaqueta recortada de couro sintético</a></h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$29,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida                    ">
-                    <span class="d-none d-xxl-block">Visualização rápida                    </span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-9.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Shorts Calvin</a></h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$62,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-10.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title"><a href="details.html">Camiseta Kirby</a></h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price text-secondary">R$17,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
-              <div class="pc__img-wrapper">
-                <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-11.jpg')}}" width="330" height="400"
-                    alt="Cropped Faux leather Jacket" class="pc__img">
-                </a>
-              </div>
-
-              <div class="pc__info position-relative">
-                <h6 class="pc__title">Xale de malha trançada</h6>
-                <div class="product-card__price d-flex align-items-center">
-                  <span class="money price-old">R$129,00</span>
-                  <span class="money price text-secondary">R$99,00</span>
-                </div>
-
-                <div
-                  class="anim_appear-bottom position-absolute bottom-0 start-0 d-none d-sm-flex align-items-center bg-body">
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-add-cart js-open-aside"
-                    data-aside="cartDrawer" title="Adicionar ao carrinho">Adicionar ao carrinho</button>
-                  <button class="btn-link btn-link_lg me-4 text-uppercase fw-medium js-quick-view"
-                    data-bs-toggle="modal" data-bs-target="#quickView" title="Visualização rápida">
-                    <span class="d-none d-xxl-block">Visualização rápida</span>
-                    <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_view" />
-                      </svg></span>
-                  </button>
-                  <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist" title="Adicionar à lista de desejos">
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <use href="#icon_heart" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- /.row -->
+          @endforeach          
+        </div>
 
         <div class="text-center mt-2">
           <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Carregar mais</a>

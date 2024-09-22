@@ -409,7 +409,7 @@
                 <a href="about.html" class="navigation__link">Sobre</a>
               </li>
               <li class="navigation__item">
-                <a href="contact.html" class="navigation__link">Contato</a>
+                <a href="{{route('home.contact')}}" class="navigation__link">Contato</a>
               </li>
             </ul>
           </nav>
